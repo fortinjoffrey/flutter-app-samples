@@ -33,7 +33,11 @@ dependencies:
   flutter:
     sdk: flutter
   freezed: ^1.1.1
+  get_it: ^7.2.0
+  json_annotation: ^4.4.0
+  json_serializable: ^6.1.4
   mobx: ^2.0.6+1
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   build_runner: ^2.1.7

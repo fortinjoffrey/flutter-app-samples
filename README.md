@@ -1,16 +1,13 @@
 # flutter_app_samples
 
-A new Flutter project.
 
-## Getting Started
+# TODO
+- Complete README with the following information:
+  - What's the minimal flutter version for this project (and recommend one)
+  - What are the app features ?
+  - What are code arch, code features, tests...
+- Rethink error handling
+  - Should the data layer redefine its own DataException ? Is it worth it ?
+  - Enrich the Failure union with more domain failures. How much should the domain know about what happens in data ?
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  
