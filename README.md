@@ -6,10 +6,11 @@ A new Flutter project with additionnal starter features
 
 - [x] Use of [Flutter Version Management](#fvm)
 - [x] Enriched [analysis options](#analysisoptions)
-
+- [x] VSCode [launch configurations](#vscodelaunchconfigurations)
+  
 <a name="fvm"/>
 
-### ⚙️ Flutter version management
+## ⚙️ Flutter version management
 
 [FVM](https://fvm.app/) is a simple CLI to manage Flutter SDK versions.
 
@@ -41,7 +42,7 @@ Add this line to your project **.gitgnore** file
 
 <a name="analysisoptions"/>
 
-### ⚙️ Analysis options
+## ⚙️ Analysis options
 
 New flutter project comes with **flutter_lints** dev dependencies that use a set of rules.
 
@@ -73,3 +74,19 @@ include: package:lint/analysis_options.yaml
 Static analysis could be customised in this file.
 See the official [documentation](https://dart.dev/guides/language/analysis-options)
 
+
+<a name="vscodelaunchconfigurations"/>
+
+## ⚙️ VSCode launch configurations
+
+It is useful to create different launch configuration to quickly run a specific app or run the app in a specific build mode.
+
+#### Setup
+
+1. Go to the **Run & Debug** tab.
+2. Tap on the "create a launch.json file" text button
+3. Select "Dart & Flutter" environment
+
+This will create a **launch.json** file inside **.vscode** in your project directory. 
+
+4. Write your configurations here
