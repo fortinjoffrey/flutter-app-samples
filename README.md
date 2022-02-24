@@ -7,6 +7,7 @@ A new Flutter project with additionnal starter features
 - [x] Use of [Flutter Version Management](#fvm)
 - [x] Enriched [analysis options](#analysisoptions)
 - [x] VSCode [launch configurations](#vscodelaunchconfigurations)
+- [x] Android Studio [launch configurations](#androidstudiolaunchconfigurations)
   
 <a name="fvm"/>
 
@@ -90,3 +91,40 @@ It is useful to create different launch configuration to quickly run a specific 
 This will create a **launch.json** file inside **.vscode** in your project directory. 
 
 4. Write your configurations here
+
+```json
+"configurations": [
+	{
+		"name": "configuration name",
+		"request": "launch",
+		"type": "dart",
+		"flutterMode": "debug"   # debug, release, profile
+	},
+]
+```
+
+<a name="androidstudiolaunchconfigurations"/>
+
+## ⚙️ Android Studio launch configurations
+
+#### Setup
+
+1. Select **Edit configurations** button
+2. Select **+** button to add new configuration
+3. Select **Flutter**
+4. Fill those fields:
+
+- **Name**: your configuration name
+- **Dart entrypoint**: the absolute path to your **main.dart** file
+- **Additional run args**: —release (or —debug or —profile)
+
+> Tip: tick the **Store as project file** checkbox to save your configurations, select the **store in .idea/runConfigurations** text button
+
+This will create, for each configuration, an **XML** file inside **.idea/runConfigurations** in your project directory. 
+
+5. Add gitignore exception for launch configurations
+
+```text
+.idea/*
+!.idea/runConfigurations/
+```
