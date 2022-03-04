@@ -9,6 +9,8 @@ A new Flutter project with additionnal starter features
 - [x] VSCode [launch configurations](#vscodelaunchconfigurations)
 - [x] Android Studio [launch configurations](#androidstudiolaunchconfigurations)
 - [x] Use of [.editorconfig](#editorconfig)
+- [x] Configure [git attributes](#gitattributes)
+
 <a name="fvm"/>
 
 ## ⚙️ Flutter version management
@@ -49,7 +51,7 @@ New flutter project comes with **flutter_lints** dev dependencies that use a set
 
 This package contains a recommended set of lints for Flutter apps, packages, and plugins to encourage good coding practices.
 
-We will use the **lint** package to use a more severe set of rules. 
+We will use the **lint** package to use a more severe set of rules.
 
 We may want to be able to customise those rules and more.
 
@@ -88,7 +90,7 @@ It is useful to create different launch configuration to quickly run a specific 
 2. Tap on the "create a launch.json file" text button
 3. Select "Dart & Flutter" environment
 
-This will create a **launch.json** file inside **.vscode** in your project directory. 
+This will create a **launch.json** file inside **.vscode** in your project directory.
 
 4. Write your configurations here
 
@@ -106,6 +108,8 @@ This will create a **launch.json** file inside **.vscode** in your project direc
 <a name="androidstudiolaunchconfigurations"/>
 
 ## ⚙️ Android Studio launch configurations
+
+It is useful to create different launch configuration to quickly run a specific app or run the app in a specific build mode.
 
 #### Setup
 
@@ -154,4 +158,26 @@ Write your custom editor config rules
 
 - For **VSCode**, **EditorConfig for VS Code** extension must be installed
 - For **Android Studio**, **EditorConfig** plugin must be installed
+
+<a name="gitattributes"/>
+
+## ⚙️ Git attributes
+
+A team of developers will often work on different OS like Windows, macOS or Linux.
+Line endings differs between operating systems. Windows uses CRLF, macOS and Linux use LF.
+
+We must ensure that git uses a unique way for line endings.
+If not some files will be entirely marked as modified.
+
+#### Setup
+
+Git can actually be configured to automatically handle line endings using a setting called autocrlf.
+However, we shouldn't rely on people having correctly configured Git installations.
+
+The solution to this is to add a `.gitattributes` file at the root of our repository and set the line endings to be automatically normalised like so:
+
+```
+# Set default behavior to automatically normalize line endings to LF
+* text=auto
+```
 
