@@ -8,7 +8,7 @@ A new Flutter project with additionnal starter features
 - [x] Enriched [analysis options](#analysisoptions)
 - [x] VSCode [launch configurations](#vscodelaunchconfigurations)
 - [x] Android Studio [launch configurations](#androidstudiolaunchconfigurations)
-  
+- [x] Use of [.editorconfig](#editorconfig)
 <a name="fvm"/>
 
 ## ⚙️ Flutter version management
@@ -128,3 +128,30 @@ This will create, for each configuration, an **XML** file inside **.idea/runConf
 .idea/*
 !.idea/runConfigurations/
 ```
+
+<a name="editorconfig"/>
+
+## ⚙️ Editor config
+The main goal of editor config is to override some IDEs options such as EOL, indent size...
+
+#### Setup
+
+##### VS Code
+
+1. Install **EditorConfig for VS Code** extension
+2. Right click on project explorer, then select **Generate .editorconfig** option
+
+##### Android Studio
+
+1. Install **EditorConfig** plugin
+2. Right click on project explorer, select **New** and **EditorConfig file**
+
+Write your custom editor config rules
+
+[Here](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties) is a complete list of available properties:
+
+#### Usage
+
+- For **VSCode**, **EditorConfig for VS Code** extension must be installed
+- For **Android Studio**, **EditorConfig** plugin must be installed
+
