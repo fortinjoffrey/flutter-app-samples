@@ -10,6 +10,7 @@ A new Flutter project with additionnal starter features
 - [x] Android Studio [launch configurations](#androidstudiolaunchconfigurations)
 - [x] Use of [.editorconfig](#editorconfig)
 - [x] Configure [git attributes](#gitattributes)
+- [x] VSCode [project settings](#vscodeprojectsettings)
 
 <a name="fvm"/>
 
@@ -179,5 +180,31 @@ The solution to this is to add a `.gitattributes` file at the root of our reposi
 ```
 # Set default behavior to automatically normalize line endings to LF
 * text=auto
+```
+
+<a name="vscodeprojectsettings"/>
+
+## ⚙️ VS Code project settings
+Editor config is not enough for project dart settings
+The main purpose here is to define:
+- default formatter for `.dart` files
+- line length for `.dart` files
+- editor rulers for `.dart` files
+
+#### Setup
+
+##### VS Code
+
+1. Create a **settings.json** file in **.vscode** folder
+2. Override settings as you like
+
+```
+{
+  "[dart]": {
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.rulers": [80, 120]
+  },
+  "dart.lineLength": 120
+}
 ```
 
