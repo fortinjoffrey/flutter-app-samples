@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: lightTheme,
+      debugShowCheckedModeBanner: false,
       home: currentUser != null ? WeatherForecastView(username: currentUser!.username) : const LoginView(),
     );
   }
