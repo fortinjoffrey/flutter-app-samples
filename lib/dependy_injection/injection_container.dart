@@ -5,6 +5,9 @@ import 'package:flutter_app_samples/features/auth/domain/repositories/user_repos
 import 'package:flutter_app_samples/features/auth/domain/usecases/fetch_current_user.dart';
 import 'package:flutter_app_samples/features/auth/domain/usecases/log_in_user.dart';
 import 'package:flutter_app_samples/features/auth/domain/usecases/log_out_user.dart';
+import 'package:flutter_app_samples/features/auth/domain/usecases/validation/validate_email.dart';
+import 'package:flutter_app_samples/features/auth/domain/usecases/validation/validate_password.dart';
+import 'package:flutter_app_samples/features/auth/presentation/viewmodels/login_viewmodel.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

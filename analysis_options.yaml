@@ -18,7 +18,10 @@ linter:
     avoid_function_literals_in_foreach_calls: false
     avoid_classes_with_only_static_members: false
     avoid_relative_lib_imports: false
+    avoid_unnecessarry_containers: true
+    always_specify_types: false
     prefer_relative_imports: false
+    prefer_single_quotes: true
     # Mute this info for now since this does not seem to work like intended
     # https://dart-lang.github.io/linter/lints/depend_on_referenced_packages.html
     depend_on_referenced_packages: false 

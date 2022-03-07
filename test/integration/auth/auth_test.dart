@@ -33,7 +33,7 @@ void main() {
     const user = User(email: 'johndoe@gmail.com', username: 'John doe');
 
     // act
-    final logInUserResult = await logInUser(user);
+    final logInUserResult = await logInUser(LogInUserParams(user.email, 'password'));
     final fetchingCurrentUserResult = await fetchCurrentUser();
 
     // assert
@@ -57,7 +57,7 @@ void main() {
     const user = User(email: 'johndoe@gmail.com', username: 'John doe');
 
     // act
-    final logInUserResult = await logInUser(user);
+    final logInUserResult = await logInUser(LogInUserParams(user.email, 'password'));
     final logOutUserResult = await logOutUser();
     final fetchingCurrentUserResult = await fetchCurrentUser();
 

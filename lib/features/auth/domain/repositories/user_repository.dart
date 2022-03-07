@@ -5,6 +5,6 @@ import 'package:flutter_app_samples/common/domain/repositories/repository.dart';
 
 abstract class UserRepository implements Repository {
   Future<Either<Failure, User?>> getUser();
-  Future<Either<Failure, Unit>> logInUser(User user);
+  Future<Either<Failure, Unit>> logInUser(String email, String password);
   Future<Either<Failure, Unit>> logOutUser();
 }

@@ -12,4 +12,12 @@ void _registerUsecases() {
   sl.registerFactory<LogOutUser>(
     () => LogOutUser(userRepository: sl<UserRepository>()),
   );
+
+  sl.registerFactory<ValidateEmail>(
+    () => ValidateEmail(),
+  );
+
+  sl.registerFactory<ValidatePassword>(
+    () => ValidatePassword(),
+  );
 }

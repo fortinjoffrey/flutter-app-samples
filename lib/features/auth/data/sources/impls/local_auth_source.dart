@@ -24,7 +24,11 @@ class LocalAuthSource implements AuthSource {
   }
 
   @override
-  Future<void> logInUser(UserDto userDto) async {
+  Future<void> logInUser(String email, String password) async {
+    // Simulate a true login call
+    await Future<void>.delayed(const Duration(seconds: 2));
+    // The username might be retrieve from a local DB, or API...
+    final userDto = UserDto(email: email, username: 'John doe');
     await _sharedPreferences.setString(_userKey, jsonEncode(userDto.toJson()));
   }
 

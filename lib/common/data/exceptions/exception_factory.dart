@@ -72,7 +72,7 @@ abstract class ExceptionFactory {
     } else if (e is HttpException) {
       se = SourceException.notFound(e.message);
     } else {
-      if (e.toString().contains("is not a subtype of")) {
+      if (e.toString().contains('is not a subtype of')) {
         se = const SourceException.unableToProcess();
       } else {
         se = const SourceException.unexpectedError();

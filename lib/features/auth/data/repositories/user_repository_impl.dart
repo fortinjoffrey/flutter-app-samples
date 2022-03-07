@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_app_samples/common/data/dtos/user_dto.dart';
 import 'package:flutter_app_samples/common/data/exceptions/exception_mapper.dart';
 import 'package:flutter_app_samples/common/domain/entities/failure.dart';
 import 'package:flutter_app_samples/common/domain/entities/user.dart';
@@ -22,9 +21,9 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> logInUser(User user) async {
+  Future<Either<Failure, Unit>> logInUser(String email, String password) async {
     try {
-      await _authSource.logInUser(user.toDto(user));
+      await _authSource.logInUser(email, password);
       return const Right(unit);
     } catch (e) {
       return Left(ExceptionMapper.toFailure(e));
