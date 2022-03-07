@@ -1,5 +1,9 @@
 # Clean architecture Weather Forecast App
 
+## Demo
+
+https://user-images.githubusercontent.com/36731875/157048261-7df50115-dadf-4be9-a8e5-3aafc32578c6.mp4
+
 <a name="features"/>
 
 ## Features
@@ -20,8 +24,10 @@
 ## ⚙️ How to build the app
 
 **2 options** are available:
-1. Flutter version manager setup (recommended)
-2. Standard Flutter setup
+1. [Flutter version manager setup](#fvmsetup) (recommended)
+2. [Standard Flutter setup](#standardsetup)
+
+<a name="fvmsetup"/>
 
 ### Flutter version manager setup (recommended)
 
@@ -45,7 +51,8 @@ It also ensures that all developers are working with the same flutter version.
 - FVM configuration for [VS Code](https://fvm.app/docs/getting_started/configuration#vs-code)
 - FVM configuration for [Android Studio](https://fvm.app/docs/getting_started/configuration#android-studio)
 
----
+<a name="standardsetup"/>
+
 ### Standard Flutter setup
 
 ##### 🔨 Prerequisites
