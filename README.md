@@ -67,12 +67,28 @@ It also ensures that all developers are working with the same flutter version.
 
 ## 📖 TODOS
 
+### Documentation
 - Complete README with the following information:
   - What are code arch, code features, tests...
+
+### Features
+- Add Sign up page (to register username aswell)
+- Add a textfield for city name
+- Add a debug FAB that will show modal containing options with switch to
+  - simulate internet error
+- Save user email, username, password in a local db
+
+### Code
+
+- Update validation usecases to return a ValidationResultType instead of unit
 - Rethink error handling
   - Should the data layer redefine its own DataException ? Is it worth it ?
   - Enrich the Failure union with more domain failures. How much should the domain know about what happens in data ?
-- Add Sign up page (to register username aswell)
 - Better handling of env var (local, staging, prod) (json config file)
 - Better handling of API KEYS (json config file)
 - Handling of multiple dio instaces for multiple sources
+
+### Tests
+
+- Add tests for weatherforecast api call
+- Create a complete integration test from login to forecast fetching
