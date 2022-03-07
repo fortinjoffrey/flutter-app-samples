@@ -102,17 +102,20 @@ class _WeatherForecastViewState extends State<WeatherForecastView> with Reaction
               ],
             ),
           ),
-          complete: (_) => CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => WeatherForecastDayTile(
-                    weatherForecast: vm.uniquePerDayForecasts[index],
+          complete: (_) => RefreshIndicator(
+            onRefresh: () async => vm.fetchForecast5Days(cityName: defaultCityName),
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => WeatherForecastDayTile(
+                      weatherForecast: vm.uniquePerDayForecasts[index],
+                    ),
+                    childCount: vm.uniquePerDayForecasts.length,
                   ),
-                  childCount: vm.uniquePerDayForecasts.length,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
