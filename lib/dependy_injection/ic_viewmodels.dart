@@ -10,4 +10,9 @@ void _registerViewmodels() {
     ),
   );
 
+  sl.registerFactory<WeatherForecastViewmodel>(
+    () => WeatherForecastViewmodel(
+      getWeatherForecast5DaysForCity: sl<GetWeatherForecast5DaysForCity>(),
+    ),
+  );
 }

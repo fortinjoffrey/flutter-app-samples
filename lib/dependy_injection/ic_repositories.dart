@@ -6,4 +6,10 @@ void _registerRepositories() {
       authSource: sl<AuthSource>(),
     ),
   );
+
+  sl.registerFactory<WeatherRepository>(
+    () => WeatherRepositoryImpl(
+      weatherForecastSource: sl<WeatherForecastSource>(),
+    ),
+  );
 }

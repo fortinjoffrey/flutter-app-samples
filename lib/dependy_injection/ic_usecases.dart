@@ -20,4 +20,10 @@ void _registerUsecases() {
   sl.registerFactory<ValidatePassword>(
     () => ValidatePassword(),
   );
+
+  sl.registerFactory<GetWeatherForecast5DaysForCity>(
+    () => GetWeatherForecast5DaysForCity(
+      weatherRepository: sl<WeatherRepository>(),
+    ),
+  );
 }
