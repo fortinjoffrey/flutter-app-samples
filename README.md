@@ -10,7 +10,9 @@ https://user-images.githubusercontent.com/36731875/157048261-7df50115-dadf-4be9-
 
 - [x] Fake local auth (login, logout)
 - [x] Persist login state
-- [x] 5 days weather forecast for Paris
+- [x] Search 5 days weather forecast for a given city
+- [x] Pull to refresh weather forecast
+- [x] Error handling
 - [x] Redirection to home view when logged in
 
 ## 📝 Table of Contents
@@ -73,7 +75,6 @@ It also ensures that all developers are working with the same flutter version.
 
 ### Features
 - Add Sign up page (to register username aswell)
-- Add a textfield for city name
 - Add a debug FAB that will show modal containing options with switch to
   - simulate internet error
 - Save user email, username, password in a local db

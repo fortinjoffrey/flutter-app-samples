@@ -23,7 +23,7 @@ extension FailureMapper on Failure {
         orElse: () => const Notice(title: 'Invalid length'),
       ),
       // -----------------------------------------------------------------------
-      orElse: () => const Notice(title: 'Une erreur est survenue'),
+      orElse: () => const Notice(title: 'An error occured'),
     );
   }
 }

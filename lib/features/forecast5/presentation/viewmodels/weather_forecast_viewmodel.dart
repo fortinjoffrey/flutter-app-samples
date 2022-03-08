@@ -18,8 +18,19 @@ abstract class _WeatherForecastViewmodel with Store {
   //----------------------------------------------------------------------------
   // OBSERVABLE PROPERTIES AND GETTERS
   //----------------------------------------------------------------------------
+
+  String _cityname = '';
+
+  String get cityname => _cityname;
+
   @observable
   DataState<List<WeatherForecast>> forecastsFetchingState = const DataState.initial();
+
+  @computed
+  bool get isForecastsFetchingStatePending => forecastsFetchingState.maybeWhen(
+        pending: () => false,
+        orElse: () => true,
+      );
 
   @computed
   List<WeatherForecast> get uniquePerDayForecasts => forecastsFetchingState.maybeWhen(
@@ -33,10 +44,12 @@ abstract class _WeatherForecastViewmodel with Store {
   //----------------------------------------------------------------------------
   // ACTIONS
   //----------------------------------------------------------------------------
-  Future<void> fetchForecast5Days({required String cityName}) async {
+  Future<void> fetchForecast5Days({String? cityname}) async {
+    _cityname = cityname ?? _cityname;
+
     forecastsFetchingState = const DataState.pending();
 
-    final result = await _getWeatherForecast5DaysForCity(cityName);
+    final result = await _getWeatherForecast5DaysForCity(_cityname);
 
     result.fold(
       (failure) => forecastsFetchingState = DataState.failure(failure.toNotice()),

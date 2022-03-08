@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const sizedBoxShrink = SizedBox.shrink();
+
 const authLoginTextFormFieldDecoration = InputDecoration(
   focusedBorder: OutlineInputBorder(
     borderSide: BorderSide(

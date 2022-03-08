@@ -2,30 +2,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartz/dartz.dart' show Unit;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_samples/common/presentation/components/center_failure.dart';
+import 'package:flutter_app_samples/common/presentation/components/center_progress_indicator.dart';
+import 'package:flutter_app_samples/common/presentation/components/rounded_search_bar.dart';
+import 'package:flutter_app_samples/common/presentation/components/sized_divider.dart';
+import 'package:flutter_app_samples/common/presentation/mixins/reaction_mixin.dart';
 import 'package:flutter_app_samples/common/presentation/models/data_state.dart';
+import 'package:flutter_app_samples/common/presentation/theme/app_widgets_constants.dart';
 import 'package:flutter_app_samples/dependy_injection/injection_container.dart';
 import 'package:flutter_app_samples/features/auth/presentation/stores/auth_store.dart';
+import 'package:flutter_app_samples/features/auth/presentation/views/components/column_with_spacing.dart';
 import 'package:flutter_app_samples/features/auth/presentation/views/login_view.dart';
 import 'package:flutter_app_samples/features/forecast5/domain/entities/weather_forecast.dart';
 import 'package:flutter_app_samples/features/forecast5/presentation/viewmodels/weather_forecast_viewmodel.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-
-mixin ReactionUsage {
-  final reactionDisposers = <ReactionDisposer>[];
-
-  /// Adds a reaction
-  void addReaction(ReactionDisposer value) {
-    reactionDisposers.add(value);
-  }
-
-  /// Disposes all added reactions
-  /// This method must be called in view's dispose method
-  void disposeReactions() {
-    reactionDisposers.forEach((disposer) => disposer());
-  }
-}
 
 class WeatherForecastView extends StatefulWidget {
   const WeatherForecastView({
@@ -39,11 +31,9 @@ class WeatherForecastView extends StatefulWidget {
   State<WeatherForecastView> createState() => _WeatherForecastViewState();
 }
 
-class _WeatherForecastViewState extends State<WeatherForecastView> with ReactionUsage {
+class _WeatherForecastViewState extends State<WeatherForecastView> with ReactionMixin {
   final vm = sl<WeatherForecastViewmodel>();
   final authStore = sl<AuthStore>();
-
-  static const defaultCityName = 'Paris';
 
   @override
   void initState() {
@@ -63,7 +53,10 @@ class _WeatherForecastViewState extends State<WeatherForecastView> with Reaction
         },
       ),
     );
-    vm.fetchForecast5Days(cityName: defaultCityName);
+
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Welcome back ${widget.username}')));
+    });
   }
 
   @override
@@ -76,7 +69,7 @@ class _WeatherForecastViewState extends State<WeatherForecastView> with Reaction
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome ${widget.username}'),
+        title: const Text('Weather 5 days forecast'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.logout),
@@ -84,47 +77,107 @@ class _WeatherForecastViewState extends State<WeatherForecastView> with Reaction
           ),
         ],
       ),
-      body: Observer(
-        builder: (_) => vm.forecastsFetchingState.when(
-          initial: () => const SizedBox.shrink(),
-          pending: () => const Center(child: CircularProgressIndicator()),
-          failure: (notice) => Center(
-            child: Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              direction: Axis.vertical,
-              children: [
-                Text(notice.title),
-                ElevatedButton.icon(
-                  onPressed: () => vm.fetchForecast5Days(cityName: defaultCityName),
-                  icon: const Icon(Icons.refresh),
-                  label: const Text('Retry'),
-                )
-              ],
-            ),
-          ),
-          complete: (_) => RefreshIndicator(
-            onRefresh: () async => vm.fetchForecast5Days(cityName: defaultCityName),
-            child: CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => WeatherForecastDayTile(
-                      weatherForecast: vm.uniquePerDayForecasts[index],
-                    ),
-                    childCount: vm.uniquePerDayForecasts.length,
+      body: Column(
+        children: [
+          _SearchBar(vm: vm),
+          _ResultForSearchText(vm: vm),
+          Expanded(
+            child: Observer(
+              builder: (_) => vm.forecastsFetchingState.when(
+                initial: () => sizedBoxShrink,
+                pending: () => const CenterProgressIndicator(),
+                failure: (notice) => CenterFailure(text: notice.title, onRetry: vm.fetchForecast5Days),
+                complete: (_) => RefreshIndicator(
+                  onRefresh: vm.fetchForecast5Days,
+                  child: CustomScrollView(
+                    slivers: [
+                      _WeatherForecastSliverList(vm: vm),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _WeatherForecastSliverList extends StatelessWidget {
+  const _WeatherForecastSliverList({
+    Key? key,
+    required this.vm,
+  }) : super(key: key);
+
+  final WeatherForecastViewmodel vm;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) => _WeatherForecastDayTile(
+          weatherForecast: vm.uniquePerDayForecasts[index],
+        ),
+        childCount: vm.uniquePerDayForecasts.length,
+      ),
+    );
+  }
+}
+
+class _SearchBar extends StatelessWidget {
+  const _SearchBar({
+    Key? key,
+    required this.vm,
+  }) : super(key: key);
+
+  final WeatherForecastViewmodel vm;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Observer(
+        builder: (_) => RoundedSearchBar(
+          hintText: 'Paris, New York...',
+          onSubmit: (text) => vm.fetchForecast5Days(cityname: text),
+          enabled: vm.isForecastsFetchingStatePending,
+          onClear: () {},
         ),
       ),
     );
   }
 }
 
-class WeatherForecastDayTile extends StatelessWidget {
-  const WeatherForecastDayTile({
+class _ResultForSearchText extends StatelessWidget {
+  const _ResultForSearchText({
+    Key? key,
+    required this.vm,
+  }) : super(key: key);
+
+  final WeatherForecastViewmodel vm;
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+      builder: (context) => vm.forecastsFetchingState.maybeWhen(
+        complete: (data) => ColumnWithSpacing(
+          spacing: 10,
+          children: [
+            Text(
+              'Weather 5 days forecast for "${vm.cityname}"',
+            ),
+            const SizedDivider(),
+          ],
+        ),
+        orElse: () => sizedBoxShrink,
+      ),
+    );
+  }
+}
+
+class _WeatherForecastDayTile extends StatelessWidget {
+  const _WeatherForecastDayTile({
     Key? key,
     required this.weatherForecast,
   }) : super(key: key);
