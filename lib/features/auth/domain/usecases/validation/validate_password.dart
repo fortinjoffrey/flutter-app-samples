@@ -1,17 +1,16 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_app_samples/common/domain/entities/failure.dart';
 import 'package:flutter_app_samples/common/domain/entities/field.dart';
 import 'package:flutter_app_samples/common/domain/usecases/usecase.dart';
+import 'package:flutter_app_samples/features/auth/domain/entities/validation_result_type.dart';
 
-class ValidatePassword implements UseCase<Either<Failure, Unit>, String> {
+class ValidatePassword implements UseCase<ValidationResultType, String> {
   @override
-  Either<Failure, Unit> call(String? password) {
+  ValidationResultType call(String? password) {
     if (password == null || password.isEmpty) {
-      return const Left(Failure.emptyField(Field.password()));
+      return const ValidationResultType.empty(Field.password());
     }
 
     if (password.length < 8) {
-      return const Left(Failure.invalidFieldLength(Field.password()));
+      return const ValidationResultType.invalidLength(Field.password());
     }
 
     final regexs = [
@@ -21,6 +20,10 @@ class ValidatePassword implements UseCase<Either<Failure, Unit>, String> {
 
     final regexMatchesNumber = regexs.where((regex) => regex.hasMatch(password)).toList().length;
 
-    return regexMatchesNumber >= 1 ? const Right(unit) : const Left(Failure.invalidField(Field.password()));
+    if (regexMatchesNumber >= 1) {
+      return const ValidationResultType.valid();
+    }
+
+    return const ValidationResultType.invalid(Field.password());
   }
 }

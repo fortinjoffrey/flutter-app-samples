@@ -7,6 +7,7 @@ import 'package:flutter_app_samples/features/auth/domain/usecases/fetch_current_
 import 'package:flutter_app_samples/features/auth/domain/usecases/log_in_user.dart';
 import 'package:flutter_app_samples/features/auth/domain/usecases/validation/validate_email.dart';
 import 'package:flutter_app_samples/features/auth/domain/usecases/validation/validate_password.dart';
+import 'package:flutter_app_samples/features/auth/presentation/entities_extensions/validation_result_type_extension.dart';
 import 'package:flutter_app_samples/main.dart';
 import 'package:mobx/mobx.dart';
 
@@ -82,18 +83,17 @@ abstract class _LoginViewmodel with Store {
   String? validateEmail() {
     final result = _validateEmail(email);
 
-    return result.fold(
-      (failure) => failure.toNotice().title,
-      (_) => null,
+    return result.maybeWhen(
+      valid: () => null,
+      orElse: () => result.toNotice().title,
     );
   }
 
   String? validatePassword() {
     final result = _validatePassword(password);
-
-    return result.fold(
-      (failure) => failure.toNotice().title,
-      (_) => null,
+    return result.maybeWhen(
+      valid: () => null,
+      orElse: () => result.toNotice().title,
     );
   }
 
