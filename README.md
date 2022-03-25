@@ -69,6 +69,14 @@ It also ensures that all developers are working with the same flutter version.
 
 ## 📖 TODOS
 
+Priority:
+1. Flavors (for better env)
+2. Widget tests (for loading in auth button, display of forecast results)
+3. Integration tests (auth, forecasts display)
+
+## Project configuration
+- Add flavors
+
 ### Documentation
 - Complete README with the following information:
   - What are code arch, code features, tests...
@@ -92,4 +100,5 @@ It also ensures that all developers are working with the same flutter version.
 ### Tests
 
 - Add tests for weatherforecast api call
+- Add widgets test for weather forecast view
 - Create a complete integration test from login to forecast fetching
