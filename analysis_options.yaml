@@ -2,9 +2,9 @@ include: package:lint/analysis_options.yaml
 
 analyzer:
   exclude:
-    - "**/*.g.dart"
-    - "**/*.gr.dart"
-    - "**/*.freezed.dart"
+    - '**/*.g.dart'
+    - '**/*.gr.dart'
+    - '**/*.freezed.dart'
   strong-mode:
     implicit-dynamic: false
     implicit-casts: false
@@ -15,13 +15,62 @@ analyzer:
 
 linter:
   rules:
+    # --------------------------------------------------------------------------
+    # avoid_function_literals_in_foreach_calls:
+    #
+    # false:
+    #        people.forEach((person) {
+    #         ...
+    #        });
+    # true:
+    #        for (var person in people) {
+    #          ...
+    #        }
     avoid_function_literals_in_foreach_calls: false
+    # --------------------------------------------------------------------------
+    # avoid_classes_with_only_static_members:
+    #
+    # false:
+    #        class Logger {
+    #           static void log(Object e) => log(e);
+    #        }
+    # true:
+    #        static void log(Object e) => log(e);
     avoid_classes_with_only_static_members: false
     avoid_relative_lib_imports: false
+    # --------------------------------------------------------------------------
+    # avoid_unnecessarry_containers:
+    #
+    # false:
+    #        Container(child: SizedBox(...))
+    # true:
+    #        SizedBox(...)
     avoid_unnecessarry_containers: true
+    # --------------------------------------------------------------------------
+    # always_specify_types:
+    #
+    # false:
+    #        final foo = 'bar';
+    # true:
+    #        final String foo = 'bar';
     always_specify_types: false
+    # --------------------------------------------------------------------------
+    # prefer_relative_imports:
+    #
+    # false:
+    #        import 'package:my_app/exceptions/source_exception.dart';
+    # true:
+    #        import '../source_exception.dart'
     prefer_relative_imports: false
+    # --------------------------------------------------------------------------
+    # prefer_single_quotes:
+    #
+    # false:
+    #        const foo = "bar";
+    # true:
+    #        const foo = 'bar';
     prefer_single_quotes: true
+    # --------------------------------------------------------------------------
     # Mute this info for now since this does not seem to work like intended
     # https://dart-lang.github.io/linter/lints/depend_on_referenced_packages.html
-    depend_on_referenced_packages: false 
+    depend_on_referenced_packages: false
